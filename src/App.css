@@ -1,0 +1,231 @@
+* {
+  box-sizing: border-box;
+}
+
+.box {
+  float: left;
+  padding: 5px;
+  display: block;
+  margin-right: 2px;
+}
+
+.boxoperationfield{
+margin:'auto';
+width:'90%';
+
+}
+.thead {
+  background-color: lightgrey;
+  text-align: center;
+  width: 100px;
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+.tbody:nth-child(even) {
+  background-color: rgb(212, 223, 223);
+}
+
+.tr {
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+.td {
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+input[type=text] {
+  width: 100%;
+  height: 25px;
+  font-size: 12px;
+  text-transform: capitalize;
+  background: #f0f1f5;
+  border-style: ridge;
+  border: 0px solid;
+  outline-style: solid;
+  outline-color: rgb(67, 143, 117);
+  outline-width: 1px;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+[title]:after {
+  color: 'red';
+}
+
+input[type='number'] {
+  height: 25px;
+  background: #f0f1f5;
+  border-style: ridge;
+  border: 0px solid;
+  outline-style: solid;
+  outline-color: rgb(67, 143, 117);
+  outline-width: 1px;
+}
+
+.customLegend {
+  border: 1px solid #2c2b2b;
+  padding: 10px 0;
+  position: relative;
+  border-radius: 25px;
+  justify-content: center;
+  background-color: rgb(226, 235, 235);
+  margin: auto;
+  width: 90%;
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
+
+.customLegend legend {
+  /* border: 1px solid #fff; */
+  background-color: rgb(227, 239, 252);
+  width: auto;
+  transform: translateY(-70%);
+  position: absolute;
+  top: 0;
+  left: 2em;
+  padding: 0 .2em;
+  font-size: medium;
+  color: rgb(128, 119, 119);
+  border-radius: 20px;
+  border: 0px;
+
+}
+
+.titlelegend {
+  position: absolute;
+  transform: translateY(-35px);
+  left: 180px;
+  background-color: white;
+  width: 230px;
+  border-radius: 15px;
+  font-size: 25px;
+  color: gray;
+  text-align: center;
+}
+
+.speedLegend {
+  position: absolute;
+  width: 20%;
+  border: 2px solid lightgray;
+  height: 110px;
+  border-radius: 15px;
+}
+
+.speedLegend legend {
+  position: absolute;
+  background-color: rgb(229, 240, 241);  
+  font-size: 12px;
+  transform: translateY(-12px);
+  left: 12px;
+  color: rgb(129, 120, 120);
+  border: 0px;
+}
+
+.show {
+  font-size: 25px;
+}
+
+.hidden {
+  display: none;
+}
+
+label {
+  font-size: 13px;
+}
+
+.modalbox {
+  float: left;
+  display: block;
+  margin-right: 2px;
+}
+
+.prog {
+  display: flex;
+  height: 20px;
+  background-color: rgb(252, 253, 253);
+  border-radius: 25px;
+  margin: 5px;
+  width: 70%
+}
+
+.bar {
+  background-color: blueviolet;
+  transition: 3s;
+  border-radius: 25px;
+  margin: 0%;
+  text-align: center;
+}
+
+.bar:hover {
+  background-color: red;
+
+}
+
+.nested {
+  transform: translateY(-20px);
+}
+
+.labeled {
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.labeled1 {
+  color: rgb(49, 25, 189);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+input[type=search] {
+
+  background: #f0f1f5;
+  vertical-align: auto;
+  border-style: ridge;
+  border: 0px solid;
+  outline-style: solid;
+  outline-color: rgb(67, 143, 117);
+  outline-width: 1px;
+  height: 28px;
+  text-transform: capitalize;
+
+}
+
+.contextinput {
+  background-color: #747070;
+}
+
+.contextinput1 {
+  background-color: #656e11;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0%;
+  }
+
+  50% {
+    opacity: 50%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+.labelerr {
+  background-color: red;
+  font-size: 14px;
+  font-Weight: bold;
+  color: white;
+  animation-name: opacity;
+  animation-duration: 2s;
+}

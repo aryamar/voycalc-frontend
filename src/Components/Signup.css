@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+.divx {
+    width: 100%;
+    background-image: linear-gradient(180deg, rgb(10, 30, 83), rgb(28, 110, 110));
+    border-radius: 0px;
+    margin-top: 0px;
+    height:720px;
+}
+
+.divsignup {
+    display: flex;
+    border: 0px solid;
+    width: auto;
+    height: auto;
+    background-color: white;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+
+
+img {
+    margin: 5px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color:aliceblue;
+
+}
+
+input[type='submit'] {
+    float: right;
+    margin-right: 15px;
+    width: 100px;
+   
+   
+}
+
+.form {
+    margin: auto;
+    width: 40%;
+}
+
+@media(max-width:1200px) {
+    .form{
+        width: 90%;
+        margin: auto;
+        padding: 50px;
+    }
+}

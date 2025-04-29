@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+
+}
+
+.gradient {
+    background-image: linear-gradient(180deg, rgb(10, 30, 83), rgb(28, 110, 110));
+    height: 720px;
+
+}
+
+.loginsegment {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    border-radius: 25px;
+    padding: 5em;
+    /* animation:mymoves 5s ; */
+}
+
+
+@media(max-width:1200px) {
+    .loginsegment {
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        /* background-image: linear-gradient(180deg, rgb(10, 30, 83), rgb(28, 110, 110)); */
+    }
+}
+
+.gray {
+    background-color: rgb(58, 180, 218);
+    font-size: 18px;
+    font-weight: bold;
+    border: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+
+input[type='submit'] {
+    height: 38px;
+    border-radius: 15px;
+    border:solid 0px;
+    
+    
+}
+
+.divimg {
+    display: flex;
+    background-color: white;
+    margin: 15px;
+    height: 45px;
+    border-radius: 15px;
+
+}
+
+.divimg img {
+    width: 30px;
+    height: 30px;
+    margin: 6px
+}
+
+.divimg input {
+    border: 0px solid;
+    height: auto;
+    margin: 5px;
+
+}
+
+/* @keyframes mymoves{
+    from{background-color:rgb(96, 121, 233) ;}
+    to{background-color: blue;}
+} */
+
+.divim {
+    display: flex;
+    background-color: white;
+    margin: 1px;
+    height: auto;
+    border-radius: 15px;
+}
+
+.divim img {
+    width: 30px;
+    height: 30px;
+    margin: 6px
+}
+
+.divim input {
+    border: 0px solid;
+    height: auto;
+    margin: 5px;
+
+}
+
+.divctlmodal {
+    margin: auto;
+    width: 80%;
+    margin-top: 1px;
+
+}
+input[type=email]{
+    background: #f0f1f5;
+  border-style: ridge;
+  border: 0px solid;
+  outline-style: solid;
+  outline-color: rgb(67, 143, 117);
+  outline-width: 1px;
+}
+input[type=password]{
+    background: #f0f1f5;
+  border-style: ridge;
+  border: 0px solid;
+  outline-style: solid;
+  outline-color: rgb(67, 143, 117);
+  outline-width: 1px;
+}

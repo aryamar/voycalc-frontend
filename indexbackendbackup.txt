@@ -1,0 +1,120 @@
+// db.connect((err) => {
+//     if (err) {
+//         console.error("Error connecting to database:", err);
+//         return;
+//     }
+//     console.log("Connected to database");
+// });
+
+// app.use(cors());
+// app.use(express.json());
+
+// واکشی ستون‌ها به صورت داینامیک
+// app.get("/api/columns", (req, res) => {
+//     db.query(`SHOW COLUMNS FROM calculation`, (err, results) => {
+//         if (err) {
+//             console.error("Error fetching columns:", err);
+//             res.status(500).send("Error fetching columns");
+//             return;
+//         }
+//         const columns = results.map((col) => ({ field: col.Field, headerName: col.Field, editable: true }));
+//         res.json(columns);
+//     });
+// });
+
+// app.get("/api/data", (req, res) => {
+//     const { page = 1, pageSize = 10, search = "" } = req.query;
+//     const offset = (page - 1) * pageSize;
+
+   // دریافت نام ستون‌های جدول
+    // db.query("SHOW COLUMNS FROM calculation", (err, columns) => {
+    //     if (err) {
+    //         console.error("Error fetching columns:", err);
+    //         res.status(500).send("Error fetching columns");
+    //         return;
+    //     }
+
+        // ساختن کوئری جستجو بر اساس تمام ستون‌ها
+        // const columnNames = columns.map((col) => col.Field);
+        // const searchQuery = search
+        //     ? `WHERE CONCAT_WS(' ', ${columnNames.join(", ")}) LIKE '%${searchQuery}%'`
+        //     : "";
+
+        // کوئری نهایی برای دریافت داده‌ها
+        // app.get("/api/data", (req, res) => {
+        //     const { page = 1, pageSize = 10 } = req.query;
+        //     const offset = (page - 1) * pageSize;
+
+//         db.query("SELECT * FROM calculation LIMIT ?, ?", [offset, parseInt(pageSize)], (err, results) => {
+//             if (err) {
+//                 console.error("Error fetching data:", err);
+//                 res.status(500).send("Error fetching data");
+//                 return;
+//             }
+//             res.json(results);
+//         });
+//     });
+
+// });
+
+
+//   // واکشی داده‌ها با صفحه‌بندی
+//   app.get("/api/data", (req, res) => {
+//     const { page = 1, pageSize = 10, search = "" } = req.query;
+//     const offset = (page - 1) * pageSize;
+//     const searchQuery = search ? `WHERE CONCAT_WS(' ', ${results.map((col) => col.Field).join(", ")}) LIKE '%${search}%'` : "";
+
+//     db.query(`SELECT * FROM calculation ${searchQuery} LIMIT ${offset}, ${pageSize}`, (err, results) => {
+//       if (err) {
+//         console.error("Error fetching data:", err);
+//         res.status(500).send("Error fetching data");
+//         return;
+//       }
+//       res.json(results);
+//     });
+//   });
+
+// ویرایش داده‌ها
+// app.put("/api/data/:id", (req, res) => {
+//     const { id } = req.params;
+//     const updates = req.body;
+//     db.query(`UPDATE calculation SET ? WHERE id = ?`, [updates, id], (err, results) => {
+//         if (err) {
+//             console.error("Error updating data:", err);
+//             res.status(500).send("Error updating data");
+//             return;
+//         }
+//         res.sendStatus(200);
+//     });
+
+// });
+
+// اضافه کردن ردیف جدید
+// app.post("/api/data", (req, res) => {
+//     const newRow = req.body;
+//     db.query(`INSERT INTO calculation SET ?`, newRow, (err, results) => {
+//         if (err) {
+//             console.error("Error adding row:", err);
+//             res.status(500).send("Error adding row");
+//             return;
+//         }
+//         res.json({ id: results.insertId, ...newRow });
+//     });
+// });
+
+// حذف ردیف
+// app.delete("/api/data/:id", (req, res) => {
+//     const { id } = req.params;
+//     db.query(`DELETE FROM calculation WHERE id = ?`, [id], (err) => {
+//         if (err) {
+//             console.error("Error deleting row:", err);
+//             res.status(500).send("Error deleting row");
+//             return;
+//         }
+//         res.sendStatus(200);
+//     });
+// });
+
+// app.listen(port, () => {
+//     console.log(`Server running at http://localhost:${port}`);
+// });

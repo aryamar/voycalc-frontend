@@ -1,0 +1,92 @@
+.sidebar {
+    margin: auto;
+    width: 80%;
+    margin-top: 15px;
+    border: 2px solid rgb(184, 182, 182);
+    height: 300px;
+    padding: 2em 2em;
+    border-radius: 25px;
+    clear: right;
+
+}
+
+.left {
+    position: relative;
+    width: 35%;
+    float: left;
+    height: 250px;
+    background-color: hsl(0, 0%, 100%);
+    padding: 15px;
+}
+
+.nav {
+    position: absolute;
+    width: 100%;
+    transition: 2s;
+    border-radius: 15px;
+    left: 0;
+
+}
+
+.nav-close {
+    width: 0;
+    z-index: -1;
+    transition: 2s;
+    opacity: 20%;
+    size: 50px;
+}
+
+.nav-open {
+    width: 100%;
+    left: 25px;
+    z-index: 0;
+    transition: 2s;
+}
+
+.right {
+    width: 30%;
+    float: left;
+    height: 250px;
+    border:2px solid;
+
+}
+
+.right-right {
+    float: left;
+    width: 5%;
+    border:2px solid;
+}
+
+.legend {
+    position: absolute;
+    transform: translateY(-50px);
+    border: 0 solid;
+    width: 150px;
+    border-radius: 25px;
+    left: 350px;
+    background-color: white;
+    text-align: center;
+}
+
+#bttn {
+    margin-left: -55px;
+    margin-bottom: 10px;
+    width: 100px;
+
+}
+
+#bttn:hover {
+    margin-left: -5px;
+    transition: 1s;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+
+}
+
+li {
+    margin-bottom: 25px;
+    font-size: 18px;
+}

@@ -1,0 +1,666 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.css'
+import Search from '../Images/Search.png'
+//import loadingg from '../Images/loadingg.gif'
+import Formula from './Formula'
+import VslTypeChange from './VslTypeChange'
+import GetVesselType from './GetVesselType'
+import add1 from '../Images/Add1.png'
+import OperationField from './OperationField'
+//import TestChild from './TestChild'
+import './OperationField.css'
+
+function Voyestimation() {
+
+    const [keychange, setKeychange] = useState({})
+    const [vsltype, setVsltype] = useState([]);
+    const [vsl, setVsl] = useState([])
+    const [search, setSearch] = useState([])
+    const [isopen, setIsOpen] = useState(true)
+    const [getport, setGetPort] = useState([])
+    const [open, setOpen] = useState(true)
+    const [lpname, setLpName] = useState('')
+    const [dpname, setDpName] = useState('')
+    const [faseleh, SetFaseleh] = useState(0)
+    const [resultlp, SetResultlp] = useState([])
+    const [resultdp, setResultDp] = useState([])
+    const [addsteamdays, setAddSteamdays] = useState(0)
+    const [errormsg, setErrorMsg] = useState('')
+
+    //const [progress, setProgress] = useState(0)
+    const [errmsgdeadweught, setErrMsgDeadweight] = useState('')
+
+    const [erropen, setErrOpen] = useState(false)
+
+    //got from Formula component
+    const [updateFormula, setUpdateFormula] = useState({
+        lpdays: 0,
+        dpdays: 0,
+        ladendays: 0,
+        ballastdays: 0,
+        ttlsteamdays: 0,
+        ttlportdays: 0,
+        addportdays: 0,
+        addsteamdays: 0,
+        updatesteamdays: 0,
+        values: 0,
+    })
+
+
+    const updateFormul = (formulaResult) => {
+        setUpdateFormula(formulaResult)
+
+    }
+
+    // got from VslTypechange Component
+    const [updateswith, setUpdateSwitch] = useState('')
+
+    const updateSwithchData = (switchResult) => {
+        setUpdateSwitch(switchResult)
+    }
+
+
+
+    const updateVslType = (vslTypeResult) => {
+        setVsltype(vslTypeResult)
+
+    }
+
+    // for comparing deadweight and cargo quantity
+    useEffect(() => {
+
+        if (keychange.Cargo_quantity > keychange.Deadweight) {
+            setErrMsgDeadweight("The Cargo Quantity is More Than Deadweight")
+            setErrOpen(true)
+        } else {
+            setErrOpen(false)
+            setErrMsgDeadweight("")
+        }
+    })
+
+    // for changing label of distance milage 
+
+    useEffect(() => {
+        if (keychange.Distance === 0) {
+            setErrorMsg('No Distance')
+
+        } else {
+            setErrorMsg('Distance:')
+
+        }
+    }, [keychange.Distance])
+
+
+    //-------------------------------------------------------------------------------
+
+    useEffect(() => {
+        const getvslslist = (async () => {
+            const getvsls = await axios.get('http://localhost:5000/vsllist')
+            setVsl(getvsls.data)
+        })
+        getvslslist()
+    }, [])
+    console.log(vsl)
+    //------------------------------------------------------------------------------------   
+
+    useEffect(() => {
+
+        if (!lpname || !dpname) {
+            let port1 = lpname;
+            let port2 = dpname;
+            port1 = 'Bandar Abbas'
+            port2 = 'Bandar Abbas'
+            keychange.LoadPort = port1
+            keychange.DischargePort = port2
+
+        } else {
+            axios.get(`http://localhost:5000/distance`, { params: { lpname, dpname } })
+                .then(res => { SetFaseleh(res.data.Distance) })
+                .then(console.log(faseleh))
+
+                .catch(err => {
+                    console.error('Fetching Data ERROR', err)
+                    SetFaseleh(0)
+                })
+        }
+
+    }, [lpname, dpname])
+
+
+    //------------------------------------------------------------------------------------  
+
+    const Handleclicksubmit = (async (e) => {
+
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/calc', keychange)
+            window.location.reload()
+            console.log(response.config.data)
+        }
+        catch (err) {
+            console.log('not connected')
+        }
+    })
+
+    //-----------------------------------------------------------------------------
+
+    useEffect(() => {
+        const retriveports = (async () => {
+            const rtrv = await axios.get('http://localhost:5000/ports')
+            setGetPort(rtrv.data)
+        })
+        retriveports()
+    }, [])
+
+    //-----------------------------------------------------------------------------   
+
+    const loaddata = (() => {
+
+        const getvslName = vsl.filter(v => { return v.Vessel_Name?.toLowerCase().includes(keychange.Vessel_Name) })
+        setSearch(getvslName)
+
+        setIsOpen(false)
+
+        // const getvpyno=vsl.filter
+        // if (getvslName) {
+        //     setProgress(vsl.length / 100)
+        // } else {
+        //     setProgress(0)
+        // }
+
+    })
+    //-----------------------------------------------------------------------------------------------
+
+    useEffect(() => {
+        const reslport = getport.filter(lports => { return lpname.toLowerCase() === '' ? lports : lports.fromport.toLowerCase().includes(lpname) })
+        SetResultlp(reslport)
+        const resdport = getport.filter(dports => { return dpname.toLowerCase() === '' ? dports : dports.Toport.toLowerCase().includes(dpname) })
+        setResultDp(resdport)
+    }, [lpname, getport, dpname])
+
+    //---------------------------------------------------------------------------------
+
+    
+    return (
+        <>
+            <Formula keychange={keychange} onUpdate={updateFormul} Faseleh={faseleh} />
+            <VslTypeChange keychange={keychange} onUpdate={updateSwithchData} />
+            <GetVesselType keychange={keychange} onUpdate={updateVslType} />
+
+
+            <fieldset className='customLegend'>
+                {/* <form className='form-group'  > */}
+                    <div className='titlelegend' >Voyage Calculation</div>
+                    <fieldset className='customLegend'   >
+                        <legend >Vessel Spec</legend>
+                        <section style={{ width: '100%' }} >
+
+                            {/* <div className='prog col-4' style={{ height: '25px' }} >
+
+                                <div className='bar' style={{ width: `${progress}%` }} aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} ></div>
+                                <div style={{ backgroundColor: 'white' }}>
+                                    <span className='nested' style={{ position: "absolute", backgroundColor: '' }}>{progress}{'%'}</span>
+                                </div>
+                            </div> */}
+
+                            <div className='box' style={{ width: '35%' }}  >
+                                <label htmlFor="Vessel_Name" >Vessel Name:</label>
+                                <div style={{ border: '0', display: 'flex', backgroundColor: 'white', borderRadius: '8px', height: '30px' }}>
+
+                                    {/* <img src={loadingg} alt='user' height={20} width={20} hidden={isopen} /> */}
+                                    <img src={Search} onClick={() => window.open('/modals', '_blanc')} alt="search" height='15px' width='20px' style={{ cursor: 'pointer', marginTop: '8px' }} />
+                                    <input
+                                        type='search'
+                                        title=''
+                                        required={true}
+                                        className='form-control'
+                                        placeholder='Search Vessels...'
+                                        name='Vessel_Name'
+                                        id='Vessel_Name'
+                                        autoComplete='off'
+                                        style={{
+                                            height: '28px',
+                                            fontSize: '14px',
+                                            padding: '0px',
+                                            margin: '0px',
+                                            marginTop: '1px',
+                                            background: '#f0f1f5',
+                                            borderStyle: 'ridge',
+                                            border: '0px ',
+                                            outlineStyle: '1px ',
+                                            outlineColor: 'rgb(67, 143, 117)',
+                                            outlineWidth: '1px',
+                                        }}
+                                        onClick={() => setIsOpen(!isopen)}
+                                        onChange={(e) => {
+                                            setKeychange({ keychange, Vessel_Name: e.target.value })
+                                            loaddata()
+                                        }}
+                                        value={keychange.Vessel_Name || ''}
+                                    />
+                                </div>
+                                {
+                                    keychange.Vessel_Name !== '' ?
+                                        search.map((srchvsl, index) => {
+                                            const { id, Vessel_Name } = srchvsl
+                                            return (
+                                                <input
+                                                    key={index}
+                                                    hidden={isopen}
+                                                    type='text'
+                                                    className='form-control'
+                                                    onClick={(e) => {
+                                                        setKeychange({ keychange, Vessel_Name: e.target.value })
+                                                        setIsOpen(!isopen)
+                                                        /* setProgress(0) */
+                                                    }}
+                                                    onChange={(e) => { setKeychange({ keychange, Vessel_Name: e.target.value }) }}
+                                                    name={Vessel_Name}
+                                                    id={id}
+                                                    style={{
+                                                        position: 'relative',
+                                                        height: '28px',
+                                                        fontSize: '14px',
+                                                        padding: '0px',
+                                                        marginLeft: '2px',
+                                                        cursor: 'pointer',
+                                                    }}
+                                                    value={Vessel_Name || ''}
+
+                                                />
+                                            )
+                                        }) : () => setIsOpen(false)
+                                }
+
+                                <label htmlFor="vesseltype">Vessel Type:</label>
+
+                                <select className='form-control' id='vesseltype' name='vesseltype' value={updateswith} style={{ height: '25px', padding: '1px', fontSize: '15px' }} onChange={e => setKeychange({ ...keychange, Vessel_Type: e.target.value })}  >
+                                    <option>...</option>
+                                    {
+                                        keychange.Deadweight ?
+                                            vsltype.map((coll) => {
+                                                const { id, Vessel_Type } = coll;
+                                                return (
+                                                    <>
+                                                        <option key={id} style={{ marginTop: '-5px' }} >{Vessel_Type}</option>
+
+                                                    </>
+                                                )
+                                            }) : <option style={{ marginTop: '-5px' }} >unknown</option>
+
+                                    }
+                                </select>
+
+                            </div>
+
+                            <div className='box' style={{ width: '20%' }} >
+
+                                <label htmlFor="Deadweight" >Deadweight</label>
+                                <input autoComplete='off' type="number" className='form-control' id="Deadweight" name="Deadweight" required={true} onChange={e => setKeychange({ ...keychange, Deadweight: e.target.value })} />
+                                <label htmlFor="VoyageNumber" >Voyage No:</label>
+                                <input type="text" className='form-control' id="VoyageNumber" name="VoyageNumber" onChange={e => setKeychange({ ...keychange, VoyageNumber: e.target.value })} />
+
+                            </div>
+
+                            <div className='box' style={{ width: '20%' }} >
+                                <fieldset className='speedLegend' >
+                                    <legend>Speed</legend>
+                                    <div className='container'>
+                                        <label htmlFor="Speed Ballast" >S/Ballast:</label><br />
+                                        <input type="number" className='form-control' id="Speed Ballast" name="Speed Ballast" onChange={e => setKeychange({ ...keychange, Speed_Ballast: e.target.value })} />
+                                        <label htmlFor="Speed Laden"> S/Laden: </label>
+                                        <input type="number" className='form-control' id="Speed Laden" name="Speed Laden" onChange={e => setKeychange({ ...keychange, Speed_Laden: e.target.value })} />
+                                    </div>
+                                </fieldset>
+                            </div>
+
+
+                            <div className='box' style={{ marginLeft: '10px', width: '20%' }} >
+                                <label htmlFor="Standingcost">Stand.Cost: </label>
+                                <input type="number" className='form-control' id="Standingcost" name="Standingcost" style={{ color: 'red' }} onChange={e => setKeychange({ ...keychange, StandingCost: e.target.value })} />
+
+                            </div>
+                        </section>
+                    </fieldset>
+
+
+
+
+
+                    <fieldset className='customLegend' style={{ marginTop: '10px', padding: '1em 0' }}>
+
+                        {/* <label htmlFor='Cargoqtty' className={`${erropen ? 'labelerr' : ''}`} style={{ marginLeft: '20px', borderRadius: '8px' }} >{errmsgdeadweught}</label> */}
+                        <legend>Voy.Spec</legend>
+                        <div style={{
+                            margin: 'auto',// عرض قاب
+                            height: "auto", // ارتفاع قاب
+                            overflow: "auto", // فعال کردن اسکرول
+                            border: "1px", // حاشیه برای قاب
+                            borderRadius: '20px',
+                            marginRight: '0px',
+                            width: '100%',
+                        }}/>
+
+                        <OperationField />
+                       
+                    </fieldset>
+                    
+                    {/* <div>
+                            <section style={{ width: '100%' }} >
+                                <div className='box' style={{ width: '25% ' }} >
+
+                                    {
+
+                                        <>
+                                            <label htmlFor="Charterer" >Charterer:</label><br />
+                                            <input type="text" className='form-control' id="Charterer" name="Charterer" autoComplete='off' onChange={e => setKeychange({ ...keychange, Charterer: e.target.value })} />
+                                        </>
+                                    }
+
+                                    <label htmlFor="Cargoqtty" >Cargo Qtty:</label><br />
+                                    <input type="number" className='form-control' id="Cargoqtty" name="Cargoqtty" onChange={e => setKeychange({ ...keychange, Cargo_quantity: e.target.value })} />
+
+                                    <label htmlFor="Commodity" >Commodity:</label><br />
+                                    <input type="text" className='form-control' autoComplete='off' id="Commodity" name="Commodity" onChange={e => setKeychange({ ...keychange, Commodity: e.target.value })} />
+
+                                    <label htmlFor="Commission">Commission: </label>
+                                    <input type="number" className='form-control' id="Commission" name="Commission" onChange={e => setKeychange({ ...keychange, Commission: e.target.value })} />
+
+                                </div>
+
+                                <div className='box' style={{ width: '25%' }} >
+                                    <label htmlFor="lpname"> Port Name</label>
+                                    < div style={{ display: 'flex', backgroundColor: 'white', borderRadius: '8px', height: '26px' }}>
+                                        <img src={add1} alt='add' title='Add Load Port' />
+
+                                        <input
+                                            className='form-control  mb-3 '
+                                            style={{ fontSize: '12px', zindex: 999 }}
+                                            id='lpname'
+                                            name='lpname'
+                                            type="search"
+                                            placeholder="Enter first port"
+                                            value={lpname || ''}
+                                            autoComplete='off'
+                                            onChange={(e) => {
+                                                setOpen(open)
+                                                setLpName(e.target.value)
+                                                setKeychange({ ...keychange, LoadPort: e.target.value })
+                                            }}
+                                            onClick={(e) => {
+                                                setOpen(false)
+                                                setKeychange({ ...keychange, LoadPort: e.target.value })
+                                            }}
+                                        />
+                                    </div>
+
+                                    {
+                                        resultlp.slice(0, 1).map((resplp, index) => (
+                                            <input
+                                                key={index}
+                                                className='form-control '
+                                                hidden={open}
+                                                style={{ outlineColor: 'white', marginLeft: '15px', fontSize: '12px', zIndex: 1000 }}
+                                                name='lpname'
+                                                type="search"
+                                                placeholder="Enter port Name"
+                                                onClick={(e) => {
+                                                    setOpen(open)
+                                                    setLpName(e.target.value)
+                                                    setKeychange({ ...keychange, LoadPort: e.target.value })
+                                                }}
+                                                onChange={(e) => {
+                                                    setOpen(false)
+                                                    setKeychange({ ...keychange, LoadPort: e.target.value })
+                                                }}
+                                                value={resplp.fromport || ''}
+                                                readOnly
+                                            />
+                                        ))
+                                    }
+
+                                    <label htmlFor="Loadrate">Load Rate: </label>
+                                    <input type="number" className='form-control' id="Loadrate" name="Loadrate" onChange={e => setKeychange({ ...keychange, LoadRate: e.target.value })
+
+                                    } />
+
+                                    <label htmlFor="LoadTerm" style={{ marginTop: '-5px' }}>Load Term: </label>
+                                    <input type="text" className='form-control' id="LoadTerm" name="LoadTerm" onChange={e => setKeychange({ ...keychange, LoadTerm: e.target.value })} />
+
+                                    <label htmlFor="LportDays" >L/port Days:</label><br />
+                                    <input type="number" className='form-control' id="LportDays" name="LportDays" value={Number.parseFloat(updateFormula.lpdays.toFixed(3)) || 0}
+                                        style={{ color: 'red', fontWeight: 'bold' }}
+                                        onChange={e => setKeychange({ ...keychange, LportDays: e.target.value })}
+                                    />
+
+                                    <label htmlFor="LPortCost">Load Port Cost: </label>
+                                    <input type="number" className='form-control' id="LPortCost" name="LPortCost" onChange={e => setKeychange({ ...keychange, LPortCost: e.target.value })} />
+
+                                </div>
+
+                                < div className='box' style={{ width: '25%' }} >
+                                    <label htmlFor="dpname" >Discharge Port:</label><br />
+                                    < div style={{ border: '0', display: 'flex', backgroundColor: 'white', borderRadius: '8px', height: '26px' }}>
+                                        <img src={add1} alt='add' title='Add Discharge Port' />
+                                        <input
+                                            className='form-control  mb-3 '
+                                            style={{ fontSize: '12px' }}
+                                            id='dpname'
+                                            name='dpname'
+                                            type="search"
+                                            placeholder="Enter Disport"
+                                            value={dpname || ''}
+                                            autoComplete='off'
+                                            onChange={(e) => {
+                                                setOpen(open)
+                                                setDpName(e.target.value)
+                                                setKeychange({ ...keychange, DischargePort: e.target.value })
+
+                                            }}
+
+                                            onClick={(e) => {
+                                                setOpen(false)
+                                                setKeychange({ ...keychange, DischargePort: e.target.value })
+
+                                            }}
+                                        />
+                                    </div>
+
+                                    {
+                                        resultdp.slice(0, 1).map((respdp, index) => (
+                                            <input
+                                                key={respdp.id}
+                                                className='form-control '
+                                                hidden={open}
+                                                style={{ outlineColor: 'white', marginLeft: '15px', fontSize: '12px' }}
+                                                name='dpname'
+                                                type="text"
+                                                placeholder="Enter port Name"
+
+                                                onClick={(e) => {
+                                                    setOpen(true)
+                                                    setDpName(e.target.value)
+                                                    setKeychange({ ...keychange, DischargePort: e.target.value })
+                                                }}
+                                                onChange={(e) => {
+                                                    setOpen(false);
+                                                    setKeychange({ ...keychange, DischargePort: e.target.value })
+                                                }}
+                                                value={respdp.Toport || ''}
+                                                readOnly
+                                            />
+                                        ))
+                                    }
+
+                                    <label htmlFor="Dischargerate">Discharge Rate: </label>
+                                    <input type="number" className='form-control' id="Dischargerate" name="Dischargerate" onChange={e => setKeychange({ ...keychange, DischargeRate: e.target.value })} />
+
+                                    <label htmlFor="DischargeTerm">Dis.Term: </label>
+                                    <input type="text" className='form-control' id="DischargeTerm" name="DischargeTerm" onChange={e => setKeychange({ ...keychange, DischargeTerm: e.target.value })} />
+
+                                    <label htmlFor="DportDays" >D/Port Days:</label><br />
+                                    <input type="number" className='form-control' id="DportDays" name="DportDays" value={Number.parseFloat(updateFormula.dpdays.toFixed(3)) || 0}
+                                        onChange={e => setKeychange({ ...keychange, DportDays: e.target.value })}
+                                        style={{ color: 'red', fontWeight: 'bold' }} />
+
+                                    <label htmlFor="DischargePortCost" style={{ marginTop: '-5px' }}>D/Port Cost: </label>
+                                    <input type="number" className='form-control' id="DischargePortCost" name="DischargePortCost" onChange={e => setKeychange({ ...keychange, DPortCost: e.target.value })} />
+
+                                    <label htmlFor="ttlsteamdays" style={{ marginTop: '-5px' }}>Ttl Steam.day</label>
+                                    <input type="number" className='form-control' id="ttlsteamdays" name="ttlsteamdays" value={parseFloat(updateFormula.ttlsteamdays.toFixed(3)) || 0} onChange={e => setKeychange({ ...keychange, Steam_Days: e.target.value })} />
+
+
+                                </div>
+                            </section>
+
+                            <section style={{ width: '100%' }} >
+                                <div className='box' style={{ width: '20% ' }} >
+                                    <label className={faseleh === 0 ? 'labeled' : 'labeled1'} htmlFor="faseleh" id='labeled' >{errormsg} </label>
+                                    <input type='number'
+                                        className='form-control'
+                                        id='faseleh'
+                                        name='faseleh'
+                                        value={parseFloat(faseleh || 0)}
+                                        onChange={e => {
+                                            setKeychange({ keychange, Distance: e.target.value })
+                                            SetFaseleh(parseFloat(e.target.value))
+                                        }
+                                        }
+                                    />
+                                    {
+                                        <>
+                                            <label htmlFor="AddPortDays">add P/Days: </label>
+                                            <input type="number" className='form-control' id="AddPortDays" name="AddPortDays"
+                                                onChange={(e) => {
+                                                    setKeychange({ ...keychange, AddPortDays: e.target.value })
+
+                                                }}
+                                            />
+                                        </>
+
+                                    }
+
+                                    <label htmlFor="AddSteamDays">add S/Days: </label>
+                                    <input type="number" className='form-control' id="AddSteamDays" name="AddSteamDays" onChange={e => {
+                                        setKeychange({ ...keychange, AddSteamDays: e.target.value })
+                                        setAddSteamdays(e.target.value)
+                                    }} />
+
+                                    <label htmlFor="PortDays" >Ttl/P.Days:</label><br />
+                                    <input type="number" className='form-control' id="PortDays" disabled name="PortDays" value={Number.parseFloat(updateFormula.ttlportdays.toFixed(3)) || 0} onChange={e => setKeychange({ ...keychange, PortDays: e.target.value })} style={{ color: 'red', fontWeight: 'bold' }} />
+
+                                    <label htmlFor="Ballast Days"> B/Days: </label>
+                                    <input type="number" style={{ fontSize: '14px', color: 'green', fontWeight: 'bold' }} className='form-control' id="Ballast Days" value={Number.parseFloat(updateFormula.ballastdays.toFixed(3)) || 0} name="Ballast Days" onChange={e => setKeychange({ ...keychange, Ballast_Days: e.target.value })} />
+
+                                    <label htmlFor="Laden Days"> L/Days: </label>
+                                    <input type="number" style={{ fontSize: '14px', color: 'green', fontWeight: 'bold' }} className='form-control' id="Laden Days" name="Laden Days" value={Number.parseFloat(updateFormula.ladendays.toFixed(3)) || 0} onChange={e => setKeychange({ ...keychange, Laden_Days: e.target.value })} />
+
+                                </div>
+                            </section>
+                        </div> */}
+
+
+                    <fieldset className='customLegend' style={{ marginTop: '10px' }}>
+                        <legend>Consumption</legend>
+
+                        <section style={{ width: '100%' }}>
+                            <div className='box' style={{ width: '24%' }} >
+
+                                <label htmlFor="IFOprice">IFO Price: </label>
+                                <input type="number" className='form-control' id="IFOprice" name="IFOprice" onChange={e => setKeychange({ ...keychange, IFO_Price: e.target.value })} />
+
+                                <label htmlFor="MDOprice">DO Price: </label>
+                                <input type="number" className='form-control' id="MDOprice" name="MDOprice" onChange={e => setKeychange({ ...keychange, MDO_Price: e.target.value })} />
+                            </div>
+
+                            <div className='box' style={{ width: '24%' }} >
+
+                                <label htmlFor="DailyIFO" > IFO_Daily: </label><br />
+                                <input type="number" className='form-control' id="DailyIFO" name="DailyIFO" onChange={e => setKeychange({ ...keychange, IFO_Qtty: e.target.value })} />
+
+                                <label htmlFor="DailyMDO"> MDO_Daily: </label><br />
+                                <input type="number" className='form-control' id="DailyMDO" name="DailyMDO" onChange={e => setKeychange({ ...keychange, MDO_Qtty: e.target.value })} />
+
+                            </div>
+
+                            <div className='box' style={{ width: '24%' }} >
+
+                                <label htmlFor="IFOAtPort">IFO@Port: </label>
+                                <input type="number" className='form-control' id="IFOAtPort" name="IFOAtPort" onChange={e => setKeychange({ ...keychange, IFOAtPort: e.target.value })} />
+                                <label htmlFor="MDOAtPort">MDO@Port: </label>
+                                <input type="number" className='form-control' id="MDOAtPort" name="MDOAtPort" onChange={e => setKeychange({ ...keychange, MDOAtPort: e.target.value })} />
+                            </div>
+
+                            <div className='box' style={{ width: '24%' }} >
+                                <label htmlFor="IFOAtSea">IFO@Sea: </label>
+                                <input type="number" className='form-control' id="IFOAtSea" name="IFOAtSea" onChange={e => setKeychange({ ...keychange, IFOAtSea: e.target.value })} />
+                                <label htmlFor="MDOAtSea">MDO@Sea: </label>
+                                <input type="number" className='form-control' id="MDOAtSea" name="MDOAtSea" onChange={e => setKeychange({ ...keychange, MDOAtSea: e.target.value })} />
+                            </div>
+
+                        </section>
+                    </fieldset>
+
+                    <fieldset className='customLegend' style={{ marginTop: '10px' }}>
+                        <legend>Result</legend>
+
+                        <section style={{ width: '100%', padding: '1px' }}>
+
+                            <div className='box' style={{ width: '31%' }} >
+
+                                <label htmlFor="Ttl_Fo_Price">Ttl.Fo.Price </label>
+                                <input type="number" className='form-control' id="Ttl_Fo_Price" name="Ttl_Fo_Price" onChange={e => setKeychange({ ...keychange, Ttl_Fo_Price: e.target.value })} />
+
+                                <label htmlFor="Ttl_Do_Price">Ttl.Do.Price </label>
+                                <input type="number" className='form-control' id="Ttl_Do_Price" name="Ttl_Do_Price" onChange={e => setKeychange({ ...keychange, Ttl_Do_Price: e.target.value })} />
+
+                                <label htmlFor="TTL_Fuel_Price">T.F.Price: </label>
+                                <input type="number" className='form-control' id="TTL_Fuel_Price" name="TTL_Fuel_Price" onChange={e => setKeychange({ ...keychange, TTL_Fuel_Price: e.target.value })} />
+
+                            </div>
+
+                            <div className='box' style={{ width: '20%' }} >
+                                <label htmlFor="TotalDays">TTL/Days: </label>
+                                <input type="number" className='form-control' id="TotalDays" name="TotalDays" onChange={e => setKeychange({ ...keychange, TTLDays: e.target.value })} />
+
+                                <label htmlFor="Ttl.Commission">Ttl.Commission </label>
+                                <input type="number" className='form-control' id="Ttl.Commission" name="TtL.Commission" onChange={e => setKeychange({ ...keychange, Ttl_Commission: e.target.value })} />
+                            </div>
+
+                            <div className='box' style={{ width: '25%' }} >
+
+                                <label htmlFor="OtherExpences">Other Expences: </label>
+                                <input type="number" className='form-control' id="OtherExpences" name="OtherExpences" onChange={e => setKeychange({ ...keychange, OtherExpences: e.target.value })} />
+
+                                <label htmlFor="TotalCost">TTL Cost: </label>
+                                <input type="number" className='form-control' id="TotalCost" name="TotalCost" onChange={e => setKeychange({ ...keychange, TotalCost: e.target.value })} />
+
+                                <label htmlFor="min_plus_1">-/+1: </label>
+                                <input type="number" className='form-control' id="min_plus_1" name="min_plus_1" onChange={e => setKeychange({ ...keychange, min_plus_1: e.target.value })} />
+                            </div>
+
+                            <div className='box' style={{ width: '20%' }} >
+
+                                <label htmlFor="DailyHire">Daily Hire: </label>
+                                <input type="number" style={{ borderBlockColor: 'red', borderBlockStartColor: 'green' }} className='form-control' id="DailyHire" name="DailyHire" onChange={e => setKeychange({ ...keychange, DailyHire: e.target.value })} />
+
+                                <label htmlFor="BreakEven" >BreakEven: </label>
+                                <input type="number" style={{ borderBlockColor: 'red', borderBlockStartColor: 'green' }} className='form-control' id="BreakEven" name="BreakEven" onChange={e => setKeychange({ ...keychange, BreakEven: e.target.value })} />
+
+                                <div style={{ textAlign: 'right', marginTop: '5px' }}>
+                                    <button className='btn btn-info' style={{ marginTop: '10px' }}
+                                        onClick={Handleclicksubmit} >Submit</button>
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
+                {/* </form > */}
+            </fieldset >
+        </>
+    )
+}
+
+
+export default Voyestimation

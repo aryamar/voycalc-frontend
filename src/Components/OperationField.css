@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+@media(max-width:900px) {
+  .container {
+
+    font-size: 10px;
+
+
+
+  }
+}

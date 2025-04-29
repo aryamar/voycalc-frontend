@@ -1,0 +1,122 @@
+
+* {
+  box-sizing: border-box;
+}
+
+.boxes {
+  float: left;
+  width: auto;
+  padding: 5px;
+  display: block;
+}
+
+.titleLegend {
+  position:absolute;
+  transform: translateY(-15px);
+  left: 450px;
+  width: auto;
+  background-color: white;
+  border-radius: 25px;
+}
+@media (min-width:680px) {
+    
+ 
+  }
+
+
+.Legend {
+  position: relative;
+  transform: translateY(-15px);
+  width: 110px;
+  background-color: white;
+  left: 70px;
+  border-radius: 20px;
+  text-align: center;
+  color: red;
+  font-size: 18px;
+}
+
+.cLegend {
+  border: 1px solid #fff;
+  background: #28292c;
+  width: auto;
+  font-size: 14px;
+  color: rgb(247, 191, 10);
+  border-radius: 20px;
+  margin-bottom: 15px;
+
+}
+
+.divgrid {
+  margin-right: auto;
+  margin-left: auto;
+  width: 90%;
+  margin-top: 15px;
+  /* border: 0px solid lightgray; */
+  height: 900px;
+  border-radius: 35px;
+  background-color: #101113;
+}
+
+.whole {
+  width: 100%;
+  display: flex;
+  background-color: #101113;
+  border-radius: 25px;
+}
+
+.sidebar1 {
+  position: relative;
+  width: 20%;
+  height: 900px;
+  border-start-start-radius: 25px;
+  border-end-start-radius: 25px;
+  transition: 1s;
+
+}
+
+.sidebar1-open {
+  width: 100%;
+  background-color: red;
+  transition:2s ;
+  z-index:1;
+}
+
+.sidebar1-close {
+ width:0; 
+ transition: 2s;
+ z-index:0;
+
+}
+
+.toggleplace {
+  width:5px;
+ 
+}
+
+.boxfieldset {
+  width: 80%;
+  float: left;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+/* input[type='text'] {
+  background: #f0f1f5;
+  border-style: ridge;
+  border: 0px solid;
+  outline-style: solid;
+  outline-color: rgb(67, 143, 117);
+  outline-width: 1px;
+} */
+
+Select {  
+  outline-style: solid; 
+  outline-color: rgb(67, 143, 117);
+  outline-width: 1px;  
+  border-radius: 5px;
+  
+}
+select option{
+  background-color: rgb(192, 206, 206);
+}
