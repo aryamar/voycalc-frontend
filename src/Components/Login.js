@@ -17,6 +17,15 @@ function Login() {
     const { login } = useAuth()
     const { logout } = useAuth()
 
+    const TestBackend = async () => {
+        try {
+          const response = await api.get('/api/test');
+          console.log(response.data); // باید ببینی: { message: "Hello from backend!" }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
 
     const [userd, setUsername] = useState({
         username: '',
@@ -58,6 +67,7 @@ function Login() {
 
     return (
         <>
+        <button onClick={TestBackend}>Test Backend</button>
             <div className='gradient'>
                 <div id='mymoves' className='loginsegment' >
                     <form  >
