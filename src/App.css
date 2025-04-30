@@ -11,7 +11,7 @@
 
 .boxoperationfield{
 margin:'auto';
-width:'90%';
+width:100%;
 
 }
 .thead {
@@ -78,7 +78,7 @@ input[type='number'] {
   justify-content: center;
   background-color: rgb(226, 235, 235);
   margin: auto;
-  width: 90%;
+  width: 95%;
   margin-top: 20px;
   margin-bottom: 16px;
 }
@@ -102,7 +102,7 @@ input[type='number'] {
 .titlelegend {
   position: absolute;
   transform: translateY(-35px);
-  left: 180px;
+  left: 100px;
   background-color: white;
   width: 230px;
   border-radius: 15px;

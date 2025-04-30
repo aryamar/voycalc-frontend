@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import develop from '../Images/develop.png'
 import pngegg from '../Images/pngegg.png'
 import './Signup.css'
+import api from '../api'
 
 function Signup() {
     const [userdata, setUserdata] = useState([])
@@ -21,7 +22,7 @@ function Signup() {
     useEffect(() => {
 
         const gdata = async () => {
-            const rtrvdata = await axios.get('http://localhost:5000/signup')
+            const rtrvdata = await api.get('/signup')
             setUserdata(rtrvdata.data)
         }
         gdata()
@@ -32,7 +33,7 @@ function Signup() {
     const btnsignup = (async (e) => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:5000/login', inputget)
+            await api.post('/login', inputget)
             alert('Successfully Registered')
             navigate('/voyestimation')
         } catch (err) {

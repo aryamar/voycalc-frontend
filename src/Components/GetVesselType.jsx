@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import api from '../api'
 
 export default function GetVesselType({ onUpdate }) {
 
@@ -11,7 +12,7 @@ export default function GetVesselType({ onUpdate }) {
             const getVslType = (async () => {
                 setLoading(true)
                 try {                    
-                    const gtType = await axios.get('http://localhost:5000/vsltype')
+                    const gtType = await api.get('/vsltype')
                     setVslType(gtType.data);                    
                     
                 } catch (err) {

@@ -1,6 +1,6 @@
 import  { useState, useEffect } from 'react'
 import axios from 'axios'
-
+import api from '../api'
 
 export default function PortStatus() {
 
@@ -10,7 +10,7 @@ export default function PortStatus() {
 
         const getState = async () => {
             try {
-                await axios.get('http://localhost:5000/portstatus').then(
+                await api.get('/portstatus').then(
                     res => setPortStatus(res.data))
                    
 

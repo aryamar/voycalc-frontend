@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
 import Search from '../Images/Search.png'
+import api from '../api'
 
 function Modals() {
     const [show, setShow] = useState(true)
@@ -48,7 +49,7 @@ function Modals() {
     useEffect(() => {
         const retriveports = (async () => {
 
-            const rtrv = await axios.get('http://localhost:5000/ports')
+            const rtrv = await api.get('/ports')
             SetPort(rtrv.data)
         })
         retriveports()
@@ -56,7 +57,7 @@ function Modals() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:5000/distance", { params: { lpname, dpname } })
+        api.get("/distance", { params: { lpname, dpname } })
             .then(res => { SetPortCode(res.data.Distance) })
             .catch(() => SetPortCode(0));
     }, [lpname, dpname, portcode])
@@ -66,7 +67,7 @@ function Modals() {
 
     const postdata = (async () => {
         try {
-            await axios.post('http://localhost:5000/calc', insdata)
+            await api.post('/calc', insdata)
             setMsg("Successfully Submitted")
         } catch {
             setMsg("There is something wrong")

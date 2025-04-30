@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import api from '../api'
+
 export default function GetDistanceTest() {
     const [distance, setDistance] = useState(0)
     const [lpname, setLpName] = useState('')
@@ -38,7 +40,7 @@ export default function GetDistanceTest() {
 
 
             try {
-                const response = await axios.get('http://localhost:5000/distance', {
+                const response = await api.get('/distance', {
                     params: {
                         lpname,
                         dpname,

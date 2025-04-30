@@ -6,7 +6,7 @@ import user from '../Images/user.png'
 import develop from '../Images/develop.png'
 import pngegg from '../Images/pngegg.png'
 import { useAuth } from './Context'
-
+import api from '../api'
 
 
 
@@ -28,7 +28,7 @@ function Login() {
     useEffect(() => {
 
         const gdata = async () => {
-            const rtrvdata = await axios.get('http://localhost:5000/signup')
+            const rtrvdata = await api.get('/signup')
             setUserdata(rtrvdata.data)
         }
         gdata()

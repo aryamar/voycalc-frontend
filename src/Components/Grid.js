@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { FaCalculator } from "react-icons/fa"
 import axios from 'axios'
 import './Grid.css'
+import api from '../api'
 
 
 
@@ -15,7 +16,7 @@ function Grid() {
 
     useEffect(() => {
         const getvslslist = (async () => {
-            const getvsls = await axios.get('http://localhost:5000/vsllist')
+            const getvsls = await api.get('/vsllist')
             setVsl(getvsls.data)
         })
         getvslslist()
@@ -24,7 +25,7 @@ function Grid() {
     useEffect(() => {
         const getVslType = (async () => {
             try {
-                const gtType = await axios.get('http://localhost:5000/vsltype')
+                const gtType = await api.get('/vsltype')
                 setVsltype(gtType.data);
             } catch (err) {
                 console.log(err);
@@ -37,7 +38,7 @@ function Grid() {
     const Handleclicksubmit = (async (e) => {
         e.preventDefault();
         try {
-            const sentback = await axios.post('http://localhost:5000/calc', keychange)
+            const sentback = await api.post('/calc', keychange)
             console.log(sentback)
             alert('The Data has been submitted successfully')
             window.location.reload()

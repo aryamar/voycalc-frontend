@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-
+import api from '../api'
 
 
 export default function DistanceUrl({ lpname, dpname, onDistanceUpdate }) {
@@ -14,7 +14,7 @@ export default function DistanceUrl({ lpname, dpname, onDistanceUpdate }) {
                
 
             } else {
-                await axios.get(`http://localhost:5000/distance`, { params: { lpname, dpname } })
+                await api.get(`/distance`, { params: { lpname, dpname } })
                     .then(res => { setDistance(res.data.Distance) })
 
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import api from '../api'
 
 export default function CalculationUrl() {
     const [getCalc, setGetCalc] = useState([])
@@ -9,7 +10,7 @@ export default function CalculationUrl() {
 
         const fetchingData = async () => {
             try {
-                await axios.get('http://localhost:5000/calculation')
+                await api.get('/calculation')
                     .then(res => setGetCalc(res.data))
             } catch (err) {
                 console.error({ error: 'There is something wrong with fetvhing data' })

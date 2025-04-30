@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+
 import 'bootstrap/dist/css/bootstrap.css'
 import Search from '../Images/Search.png'
 //import loadingg from '../Images/loadingg.gif'
@@ -11,6 +11,7 @@ import add1 from '../Images/Add1.png'
 import OperationField from './OperationField'
 //import TestChild from './TestChild'
 import './OperationField.css'
+import api from '../api'
 
 function Voyestimation() {
 
@@ -97,7 +98,7 @@ function Voyestimation() {
 
     useEffect(() => {
         const getvslslist = (async () => {
-            const getvsls = await axios.get('http://localhost:5000/vsllist')
+            const getvsls = await api.get('/vsllist')
             setVsl(getvsls.data)
         })
         getvslslist()
@@ -116,7 +117,7 @@ function Voyestimation() {
             keychange.DischargePort = port2
 
         } else {
-            axios.get(`http://localhost:5000/distance`, { params: { lpname, dpname } })
+            api.get(`/distance`, { params: { lpname, dpname } })
                 .then(res => { SetFaseleh(res.data.Distance) })
                 .then(console.log(faseleh))
 
@@ -135,7 +136,7 @@ function Voyestimation() {
 
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/calc', keychange)
+            const response = await api.post('/calc', keychange)
             window.location.reload()
             console.log(response.config.data)
         }
@@ -148,7 +149,7 @@ function Voyestimation() {
 
     useEffect(() => {
         const retriveports = (async () => {
-            const rtrv = await axios.get('http://localhost:5000/ports')
+            const rtrv = await api.get('/ports')
             setGetPort(rtrv.data)
         })
         retriveports()
@@ -299,7 +300,7 @@ function Voyestimation() {
 
                                 <label htmlFor="Deadweight" >Deadweight</label>
                                 <input autoComplete='off' type="number" className='form-control' id="Deadweight" name="Deadweight" required={true} onChange={e => setKeychange({ ...keychange, Deadweight: e.target.value })} />
-                                <label htmlFor="VoyageNumber" >Voyage No:</label>
+                                <label htmlFor="VoyageNumber" >Voy No:</label>
                                 <input type="text" className='form-control' id="VoyageNumber" name="VoyageNumber" onChange={e => setKeychange({ ...keychange, VoyageNumber: e.target.value })} />
 
                             </div>

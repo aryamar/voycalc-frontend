@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import axios from 'axios'
-
+import api from "../api"
 export default function CommodityUrl() {
 
     const[getCommodity,setGetCommodity]=useState([])
@@ -8,7 +8,7 @@ export default function CommodityUrl() {
      useEffect(() => {
             const getCargo = async () => {
     
-                await axios.get('http://localhost:5000/commodity')
+                await api.get('/commodity')
                 .then(res=>setGetCommodity(res.data))                
             }
             getCargo()

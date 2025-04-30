@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import api from '../api'
 
 
 export default function Charterer() {
@@ -12,7 +12,7 @@ export default function Charterer() {
     useEffect(() => {
         const getchdata = async () => {
             try {
-                await axios.get("http://localhost:5000/charterer")
+                await api.get("/charterer")
                     .then(res => setGetCharterer(res.data))
                     
             } catch {
