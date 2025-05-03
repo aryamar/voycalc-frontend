@@ -30,11 +30,11 @@ function Login() {
     useEffect(() => {
 
         const gdata = async () => {
-            const rtrvdata = await api.get('/login',userd)
+            const rtrvdata = await api.get('/login')
             setUserdata(rtrvdata.data)
         }
         gdata()
-    }, [userd])
+    }, [])
 
   
 
