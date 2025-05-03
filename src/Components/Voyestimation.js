@@ -632,7 +632,7 @@ function Voyestimation() {
 
                             <div className='box' style={{ width: '25%' }} >
 
-                                <label htmlFor="OtherExpences">Other Expences: </label>
+                                <label htmlFor="OtherExpences">Other Costs: </label>
                                 <input type="number" className='form-control' id="OtherExpences" name="OtherExpences" onChange={e => setKeychange({ ...keychange, OtherExpences: e.target.value })} />
 
                                 <label htmlFor="TotalCost">TTL Cost: </label>

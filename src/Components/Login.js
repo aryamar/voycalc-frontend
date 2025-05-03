@@ -30,7 +30,7 @@ function Login() {
     useEffect(() => {
 
         const gdata = async () => {
-            const rtrvdata = await api.get('/getlogin')
+            const rtrvdata = await api.get('/login',userd)
             setUserdata(rtrvdata.data)
         }
         gdata()
