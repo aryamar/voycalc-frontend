@@ -30,12 +30,14 @@ function Login() {
     useEffect(() => {
 
         const gdata = async () => {
-            const rtrvdata = await api.get('/login',userd)
+            const rtrvdata = await api.get('/getlogin')
             setUserdata(rtrvdata.data)
         }
         gdata()
     }, [userd])
+
     console.log(userd)
+    console.log(userdata)
 
     const cmpremail = userdata.find(usrdta => usrdta.email === userd.email)
     const navigat = useNavigate()
