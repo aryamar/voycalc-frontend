@@ -253,11 +253,11 @@ function Voyestimation() {
                                                     type='text'
                                                     className='form-control'
                                                     onClick={(e) => {
-                                                        setKeychange({ keychange, Vessel_Name: e.target.value })
+                                                        setKeychange({...keychange, Vessel_Name: e.target.value })
                                                         setIsOpen(!isopen)
                                                         /* setProgress(0) */
                                                     }}
-                                                    onChange={(e) => { setKeychange({ keychange, Vessel_Name: e.target.value }) }}
+                                                    onChange={(e) => { setKeychange({...keychange, Vessel_Name: e.target.value }) }}
                                                     name={Vessel_Name}
                                                     id={id}
                                                     style={{

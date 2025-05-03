@@ -17,14 +17,7 @@ function Login() {
     const { login } = useAuth()
     const { logout } = useAuth()
 
-    const TestBackend = async () => {
-        try {
-          const response = await api.get('/api/test');
-          console.log(response.data); // باید ببینی: { message: "Hello from backend!" }
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
+    
 
 
     const [userd, setUsername] = useState({
@@ -37,11 +30,12 @@ function Login() {
     useEffect(() => {
 
         const gdata = async () => {
-            const rtrvdata = await api.get('/signup')
+            const rtrvdata = await api.get('/login',userd)
             setUserdata(rtrvdata.data)
         }
         gdata()
-    }, [])
+    }, [userd])
+    console.log(userd)
 
     const cmpremail = userdata.find(usrdta => usrdta.email === userd.email)
     const navigat = useNavigate()
@@ -67,7 +61,7 @@ function Login() {
 
     return (
         <>
-        <button onClick={TestBackend}>Test Backend</button>
+       
             <div className='gradient'>
                 <div id='mymoves' className='loginsegment' >
                     <form  >

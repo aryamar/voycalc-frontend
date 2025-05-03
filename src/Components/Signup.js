@@ -9,6 +9,7 @@ import api from '../api'
 function Signup() {
     const [userdata, setUserdata] = useState([])
     const [inputget, setInputget] = useState({
+
         username: '',
         password: '',
         email: ''
@@ -19,21 +20,21 @@ function Signup() {
     console.log(inputget)
     console.log(userdata)
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const gdata = async () => {
-            const rtrvdata = await api.get('/signup')
-            setUserdata(rtrvdata.data)
-        }
-        gdata()
-    }, [])
+    //     const gdata = async () => {
+    //         const rtrvdata = await api.post('/signup')
+    //         setUserdata(rtrvdata.data)
+    //     }
+    //     gdata()
+    // }, [])
 
 
 
     const btnsignup = (async (e) => {
         e.preventDefault()
         try {
-            await api.post('/login', inputget)
+            await api.post('/signup', inputget)
             alert('Successfully Registered')
             navigate('/voyestimation')
         } catch (err) {
@@ -50,12 +51,16 @@ function Signup() {
                     <h1>Sign Up</h1>
                     <div className='divsignup'>
                         <img src={develop} alt='envelop' width='30px' height='30px' />
-                        <input type='email' className='form-control' name='email' style={{ border: '0px', margin: "4px", width: '100%' }} onChange={(e) => setInputget({ ...inputget, email: e.target.value })} placeholder='E-Mail' />
+                        <input type='email' className='form-control' 
+                        name='email' style={{ border: '0px', margin: "4px", width: '100%' }} 
+                        onChange={(e) => setInputget({ ...inputget, email: e.target.value })} placeholder='E-Mail' />
                     </div>
 
                     <div className='divsignup'>
                         <img src={pngegg} alt='envelop' width='30px' height='30px' />
-                        <input type='password' className='form-control' name='email' style={{ border: '0px', margin: "5px" }} onChange={(e) => setInputget({ ...inputget, password: e.target.value })} placeholder='Password' />
+                        <input type='password' className='form-control' 
+                        name='email' style={{ border: '0px', margin: "5px" }} 
+                        onChange={(e) => setInputget({ ...inputget, password: e.target.value })} placeholder='Password' />
                     </div>
 
                     <input type='submit' onClick={btnsignup} />
