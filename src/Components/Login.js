@@ -36,8 +36,7 @@ function Login() {
         gdata()
     }, [userd])
 
-    console.log(userd)
-    console.log(userdata)
+  
 
     const cmpremail = userdata.find(usrdta => usrdta.email === userd.email)
     const navigat = useNavigate()
@@ -58,8 +57,6 @@ function Login() {
         }
 
     })
-
-
 
     return (
         <>

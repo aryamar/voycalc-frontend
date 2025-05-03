@@ -5,7 +5,7 @@ const urlsToCache = [
   '/static/js/bundle.js'
 ];
 
-self.addEventListener('install', event => {
+window.self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -14,7 +14,7 @@ self.addEventListener('install', event => {
   );
 });
 
-self.addEventListener('fetch', event => {
+window.self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => {
@@ -23,7 +23,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-self.addEventListener('activate', event => {
+window.self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
