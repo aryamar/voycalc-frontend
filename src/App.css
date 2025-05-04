@@ -6,14 +6,14 @@
   float: left;
   padding: 5px;
   display: block;
-  margin-right: 2px;
+  margin: 0px;
 }
 
-.boxoperationfield{
-margin:'auto';
-width:100%;
-
+.boxoperationfield {
+  margin: 'auto';
+  width: 100%;
 }
+
 .thead {
   background-color: lightgrey;
   text-align: center;
@@ -121,7 +121,7 @@ input[type='number'] {
 
 .speedLegend legend {
   position: absolute;
-  background-color: rgb(229, 240, 241);  
+  background-color: rgb(229, 240, 241);
   font-size: 12px;
   transform: translateY(-12px);
   left: 12px;

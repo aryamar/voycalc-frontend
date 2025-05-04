@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.container {}
+
 
 .table thead {
   position: sticky;
@@ -13,9 +13,12 @@
 @media(max-width:900px) {
   .container {
 
-    font-size: 10px;
-
-
-
+    font-size: 8px;
+    font-weight: bold;
   }
+}
+.img{
+margin-top: -15px;
+margin-bottom: -15px;
+margin-left: -5px;
 }

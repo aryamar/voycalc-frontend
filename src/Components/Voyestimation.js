@@ -308,10 +308,10 @@ function Voyestimation() {
                             <div className='box' style={{ width: '20%' }} >
                                 <fieldset className='speedLegend' >
                                     <legend>Speed</legend>
-                                    <div className='container'>
-                                        <label htmlFor="Speed Ballast" >S/Ballast:</label><br />
-                                        <input type="number" className='form-control' id="Speed Ballast" name="Speed Ballast" onChange={e => setKeychange({ ...keychange, Speed_Ballast: e.target.value })} />
-                                        <label htmlFor="Speed Laden"> S/Laden: </label>
+                                    <div className='container'style={{fontWeight:'normal'}}>
+                                        <label htmlFor="Speed Ballast" style={{marginTop:'5px'}} >S/Ballast:</label><br />
+                                        <input type="number" className='form-control'  id="Speed Ballast" name="Speed Ballast" onChange={e => setKeychange({ ...keychange, Speed_Ballast: e.target.value })} />
+                                        <label htmlFor="Speed Laden" style={{marginTop:'2px'}}> S/Laden: </label>
                                         <input type="number" className='form-control' id="Speed Laden" name="Speed Laden" onChange={e => setKeychange({ ...keychange, Speed_Laden: e.target.value })} />
                                     </div>
                                 </fieldset>
@@ -569,19 +569,19 @@ function Voyestimation() {
                         <section style={{ width: '100%' }}>
                             <div className='box' style={{ width: '24%' }} >
 
-                                <label htmlFor="IFOprice">IFO Price: </label>
+                                <label htmlFor="IFOprice">IFO Price </label>
                                 <input type="number" className='form-control' id="IFOprice" name="IFOprice" onChange={e => setKeychange({ ...keychange, IFO_Price: e.target.value })} />
 
-                                <label htmlFor="MDOprice">DO Price: </label>
+                                <label htmlFor="MDOprice">DO Price </label>
                                 <input type="number" className='form-control' id="MDOprice" name="MDOprice" onChange={e => setKeychange({ ...keychange, MDO_Price: e.target.value })} />
                             </div>
 
                             <div className='box' style={{ width: '24%' }} >
 
-                                <label htmlFor="DailyIFO" > IFO_Daily: </label><br />
+                                <label htmlFor="DailyIFO" > IFO_Daily </label><br />
                                 <input type="number" className='form-control' id="DailyIFO" name="DailyIFO" onChange={e => setKeychange({ ...keychange, IFO_Qtty: e.target.value })} />
 
-                                <label htmlFor="DailyMDO"> MDO_Daily: </label><br />
+                                <label htmlFor="DailyMDO"> MDO_Daily </label><br />
                                 <input type="number" className='form-control' id="DailyMDO" name="DailyMDO" onChange={e => setKeychange({ ...keychange, MDO_Qtty: e.target.value })} />
 
                             </div>
@@ -595,9 +595,9 @@ function Voyestimation() {
                             </div>
 
                             <div className='box' style={{ width: '24%' }} >
-                                <label htmlFor="IFOAtSea">IFO@Sea: </label>
+                                <label htmlFor="IFOAtSea">IFO@Sea </label>
                                 <input type="number" className='form-control' id="IFOAtSea" name="IFOAtSea" onChange={e => setKeychange({ ...keychange, IFOAtSea: e.target.value })} />
-                                <label htmlFor="MDOAtSea">MDO@Sea: </label>
+                                <label htmlFor="MDOAtSea">MDO@Sea </label>
                                 <input type="number" className='form-control' id="MDOAtSea" name="MDOAtSea" onChange={e => setKeychange({ ...keychange, MDOAtSea: e.target.value })} />
                             </div>
 
@@ -617,37 +617,37 @@ function Voyestimation() {
                                 <label htmlFor="Ttl_Do_Price">Ttl.Do.Price </label>
                                 <input type="number" className='form-control' id="Ttl_Do_Price" name="Ttl_Do_Price" onChange={e => setKeychange({ ...keychange, Ttl_Do_Price: e.target.value })} />
 
-                                <label htmlFor="TTL_Fuel_Price">T.F.Price: </label>
+                                <label htmlFor="TTL_Fuel_Price">T.F.Price </label>
                                 <input type="number" className='form-control' id="TTL_Fuel_Price" name="TTL_Fuel_Price" onChange={e => setKeychange({ ...keychange, TTL_Fuel_Price: e.target.value })} />
 
                             </div>
 
                             <div className='box' style={{ width: '20%' }} >
-                                <label htmlFor="TotalDays">TTL/Days: </label>
+                                <label htmlFor="TotalDays">TTL/Days </label>
                                 <input type="number" className='form-control' id="TotalDays" name="TotalDays" onChange={e => setKeychange({ ...keychange, TTLDays: e.target.value })} />
 
-                                <label htmlFor="Ttl.Commission">Ttl.Commission </label>
+                                <label htmlFor="Ttl.Commission">Ttl.Comm. </label>
                                 <input type="number" className='form-control' id="Ttl.Commission" name="TtL.Commission" onChange={e => setKeychange({ ...keychange, Ttl_Commission: e.target.value })} />
                             </div>
 
                             <div className='box' style={{ width: '25%' }} >
 
-                                <label htmlFor="OtherExpences">Other Costs: </label>
+                                <label htmlFor="OtherExpences">Other Costs </label>
                                 <input type="number" className='form-control' id="OtherExpences" name="OtherExpences" onChange={e => setKeychange({ ...keychange, OtherExpences: e.target.value })} />
 
-                                <label htmlFor="TotalCost">TTL Cost: </label>
+                                <label htmlFor="TotalCost">TTL Costs </label>
                                 <input type="number" className='form-control' id="TotalCost" name="TotalCost" onChange={e => setKeychange({ ...keychange, TotalCost: e.target.value })} />
 
-                                <label htmlFor="min_plus_1">-/+1: </label>
+                                <label htmlFor="min_plus_1">-/+1 </label>
                                 <input type="number" className='form-control' id="min_plus_1" name="min_plus_1" onChange={e => setKeychange({ ...keychange, min_plus_1: e.target.value })} />
                             </div>
 
                             <div className='box' style={{ width: '20%' }} >
 
-                                <label htmlFor="DailyHire">Daily Hire: </label>
+                                <label htmlFor="DailyHire">Daily Hire </label>
                                 <input type="number" style={{ borderBlockColor: 'red', borderBlockStartColor: 'green' }} className='form-control' id="DailyHire" name="DailyHire" onChange={e => setKeychange({ ...keychange, DailyHire: e.target.value })} />
 
-                                <label htmlFor="BreakEven" >BreakEven: </label>
+                                <label htmlFor="BreakEven" >BreakEven </label>
                                 <input type="number" style={{ borderBlockColor: 'red', borderBlockStartColor: 'green' }} className='form-control' id="BreakEven" name="BreakEven" onChange={e => setKeychange({ ...keychange, BreakEven: e.target.value })} />
 
                                 <div style={{ textAlign: 'right', marginTop: '5px' }}>

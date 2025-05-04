@@ -9,6 +9,10 @@ import DistanceUrl from './DistanceUrl'
 import PortsUrl from './PortsUrl'
 import Formula from './Formula'
 import Testgetfromdb from './Testgetfromdb'
+import down from '../Images/down.png'
+import up from '../Images/up.png'
+import dlt from '../Images/dlt.png'
+import plus from '../Images/plus.png'
 
 
 
@@ -292,21 +296,20 @@ export default function OperationField() {
                 < div style={{
                     marginLeft: '5px',
                     width: '99%',
-                    height: "200px", // ارتفاع قاب
+                    height: "145px", // ارتفاع قاب
                     overflow: "auto", // فعال کردن اسکرول
                     border: "1px solid #ccc", // حاشیه برای قاب
                     borderRadius: '20px',
                     float: 'left',
                 }}
                 >
-
                     <table>
                         {/* <fieldset className='customLegend' style={{ marginTop: '10px', padding: '1em 0' }}> */}
                         < div className="table table-bordered table-striped " >
-                            <thead >
-                                <tr >
+                            <thead>
+                                <tr style={{fontSize:'12px'}} >
                                     <th style={{ textAlign: 'center', position: 'sticky', left: '0', top: '0', background: 'white' }}>ID</th>
-                                    <th style={{ textAlign: 'center', position: 'sticky', left: '35px', top: '0', background: 'white' }} >MoveUp/Action/MoveDown</th>
+                                    <th style={{ textAlign: 'center', position: 'sticky', left: '30px', top: '0', background: 'white',fontSize:'11px' }} >MoveUp/Action/MoveDown</th>
                                     <th>Port_Status</th>
                                     <th>Charterer</th>
                                     <th>Cargo_Qtty</th>
@@ -348,19 +351,20 @@ export default function OperationField() {
 
 
 
-                                            <td style={{ textAlign: 'center', position: 'sticky', left: '35px', background: 'white' }} >
+                                            <td style={{ textAlign: 'center', position: 'sticky', left: '30px', background: 'white' }} >
 
-                                                <button className='btn btn-info btn-sm'
-                                                    style={{ marginRight: '5px', position: 'sticky' }}
+                                                {/* <button className='btn btn-info btn-sm'
+                                                    style={{ marginRight: '5px', position: 'sticky',fontSize:'10px' }}
                                                     onClick={() => selectUpRow(index, 'Distance', null)}
                                                 // disabled={index === 0 }
-                                                >
-                                                    UP
-                                                </button>
+                                                > */}
+                                                    <img className='img' title='Move Up' src={up} alt='up.png' height='25px' width='25px'  onClick={() => selectUpRow(index, 'Distance', null)}/>
+                                                {/* </button> */}
 
 
-                                                <button
+                                                {/* <button
                                                     className="btn btn-success btn-sm"
+                                                    style={{ marginRight: '5px', position: 'sticky',fontSize:'10px' }}
                                                     onClick={() => {
                                                         handleAddRow(rows.Id, index)
                                                         SelectedRow(rows)
@@ -368,27 +372,34 @@ export default function OperationField() {
                                                     }}
                                                     onBlur={() => getFaseleh(index, 'Distance')}
                                                     title='Add Row'
-                                                >
-                                                    +
-                                                </button>
+                                                > */}
+                                                  <img className='img' title='Add Row' src={plus} alt='plus.png' height='40px' width='40px'  onClick={() => {
+                                                        handleAddRow(rows.Id, index)
+                                                        SelectedRow(rows)
+                                                        getIndex(index)
+                                                    }}/> 
+                                                {/* </button> */}
 
-                                                <button className='btn btn-danger btn-sm'
-                                                    style={{ marginLeft: '5px', position: 'sticky' }}
+                                                {/* <button className='btn btn-danger btn-sm'
+                                                    style={{ marginRight: '5px', position: 'sticky',fontSize:'10px' }}
                                                     onClick={e => {
                                                         fadeRow(rows.Id, index)
 
-                                                    }}
-                                                >
-                                                    Delete
-                                                </button>
+                                                    }} 
+                                                >*/}
+                                                   <img className='img' title='Delete Row'   src={dlt} alt='delete.png' height='25px' width='30px'   onClick={e => {
+                                                        fadeRow(rows.Id, index)
 
-                                                <button className='btn btn-info btn-sm'
-                                                    style={{ marginLeft: '5px', position: 'sticky' }}
+                                                    }} />
+                                                {/* </button> */}
+
+                                                {/* <button className='btn btn-info btn-sm'
+                                                    style={{ marginRight: '5px', position: 'sticky',fontSize:'10px' }}
                                                     onClick={() => selectDownRow(index)}
                                                     disabled={index === rows.length - 1}
-                                                >
-                                                    DN
-                                                </button>
+                                                > */}
+                                                   <img className='img' title='Move Down' src={down} alt='down.png' height='25px' width='25px' onClick={() => selectDownRow(index)}/>
+                                                {/* </button> */}
                                             </td>
 
                                             <td>
@@ -685,12 +696,12 @@ export default function OperationField() {
             </section>
             <div className="container">
                 <div className="row">
-                    <div className="col">Add P/Days:</div>
-                    <div className="col">add S/Days:</div>
-                    <div className="col">Ttl Steam.day</div>
-                    <div className="col">Ttl/P.Days:</div>
-                    <div className="col">B/Days:</div>
-                    <div className="col">L/Days:</div>
+                    <div className="col">Add P/Days</div>
+                    <div className="col">add S/Days</div>
+                    <div className="col">Ttl.Stm/days</div>
+                    <div className="col">Ttl.P/Days</div>
+                    <div className="col">B/Days</div>
+                    <div className="col">L/Days</div>
 
                 </div>
 
