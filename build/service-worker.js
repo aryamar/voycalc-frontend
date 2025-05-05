@@ -1,8 +1,8 @@
 const CACHE_NAME = 'voycalc-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/static/js/bundle.js'
+  'https://voycalc-frontend.vercel.app/',
+  'https://voycalc-frontend.vercel.app/index.html',
+  'https://voycalc-frontend.vercel.app/static/js/bundle.js'
 ];
 
 self.addEventListener('install', event => {

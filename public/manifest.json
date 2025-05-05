@@ -4,12 +4,12 @@
  
       "icons": [
         {
-          "src": "logo192.png",
+          "src": "vessel192.png",
           "type": "image/png",
           "sizes": "192x192"
         },
         {
-          "src": "logo512.png",
+          "src": "vessel512.png",
           "type": "image/png",
           "sizes": "512x512"
         }
