@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Login.css'
-import axios from 'axios'
+
 import { useNavigate } from 'react-router-dom'
 import user from '../Images/user.png'
 import develop from '../Images/develop.png'
@@ -12,12 +12,9 @@ import api from '../api'
 
 function Login() {
     const [userdata, setUserdata] = useState([])
-
     const navigate = useNavigate()
     const { login } = useAuth()
-    const { logout } = useAuth()
-
-    
+    const { logout } = useAuth()   
 
 
     const [userd, setUsername] = useState({
@@ -59,8 +56,7 @@ function Login() {
     })
 
     return (
-        <>
-       
+        <>       
             <div className='gradient'>
                 <div id='mymoves' className='loginsegment' >
                     <form  >

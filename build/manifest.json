@@ -1,21 +1,22 @@
 {
-  "short_name": "ShipTop",
-  "name": "ShipTop App",
-  "icons": [
-   
-    {
-      "src": "vessel192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "vessel512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+  "short_name": "Ship App",
+  "name": "Ship App",
+ 
+      "icons": [
+        {
+          "src": "vessel192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+          "src": "vessel512.png",
+          "type": "image/png",
+          "sizes": "512x512"
+        }
+      ],
+      "start_url": ".",
+      "display": "standalone",
+      "theme_color": "#000000",
+      "background_color": "#ffffff"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-}
+    
