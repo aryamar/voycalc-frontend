@@ -1,19 +1,15 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ShipTop",
+  "name": "ShipTop App",
   "icons": [
+   
     {
-      "src": "favicon.ico",
-      "type": "image.ico",
-      "sizes": ""
-    },
-    {
-      "src": "logo192.png",
+      "src": "vessel192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "vessel512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
